@@ -1,0 +1,5 @@
+#exclude all files/folders you don't want to be included in the repository
+
+.vscode
+node_modules
+.DS_Store
