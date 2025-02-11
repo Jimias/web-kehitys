@@ -50,7 +50,8 @@ DELETE http://localhost:3000/api/items/2
 GET http://localhost:3000/api/users
 
 ### TODO: get user by id
-GET http://localhost:3000/api/users/2
+GET http://localhost:3000/api/users/1
+
 
 ### add user
 POST http://localhost:3000/api/users
@@ -70,3 +71,9 @@ content-type: application/json
   "username": "Uusi käyttäjä",
   "password": "salakala"
 }
+
+//diary record endpoints
+
+GET http://localhost:3000/api/entries
+
+GET http://localhost:3000/api/entries/1
