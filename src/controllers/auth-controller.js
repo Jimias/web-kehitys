@@ -2,12 +2,14 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import 'dotenv/config';
 import {selectUserByUsername} from '../models/user-model.js';
+import {customError} from '../middlewares/error-handler.js';
 
 // user authentication (login)
-const login = async (req, res) => {
+const login = async (req, res, next) => {
   const {username, password} = req.body;
   if (!username) {
-    return res.status(401).json({message: 'Username missing.'});
+    return next(customError('Username missing.', 400));
+    //return res.status(401).json({message: 'Username missing.'});
   }
   const user = await selectUserByUsername(username);
   // jos käyttäjä löytyi tietokannasta verrataan kirjautumiseen syötettyä sanaa tietokannan
@@ -21,7 +23,8 @@ const login = async (req, res) => {
       return res.json({message: 'login ok', user, token});
     }
   }
-  res.status(401).json({message: 'Bad username/password.'});
+  //res.status(401).json({message: 'Bad username/password.'});
+  next(customError('Bad username/password.', 401));
 };
 
 const getMe = (req, res) => {
